@@ -1,12 +1,14 @@
 let data = [
-    {name: '朱昆鹏1', src: './src/img/1.png', des: '前端工程师1', sex: 'man'},
-    {name: '朱昆鹏2', src: './src/img/1.png', des: '前端工程师2', sex: 'man'},
-    {name: '朱昆鹏3', src: './src/img/1.png', des: '前端工程师3', sex: 'man'},
-    {name: '朱昆鹏4', src: './src/img/1.png', des: '前端工程师4', sex: 'man'},
-    {name: '林雨桐', src: './src/img/1.png', des: '前端工程师5', sex: 'woman'}
+    {name: '朱昆鹏1', src: './img/1.png', des: '前端工程师1', sex: 'man'},
+    {name: '朱昆鹏2', src: './img/1.png', des: '前端工程师2', sex: 'man'},
+    {name: '朱昆鹏3', src: './img/1.png', des: '前端工程师3', sex: 'man'},
+    {name: '朱昆鹏4', src: './img/1.png', des: '前端工程师4', sex: 'man'},
+    {name: '林雨桐', src: './img/1.png', des: '前端工程师5', sex: 'woman'}
 ]
 
+// 全局状态管理
 let filterStr = 'All'
+
 
 /**
  * 根据数据生成 li标签
@@ -100,6 +102,3 @@ btns.forEach( item => {
         createliEles(ulDom, data)
     })
 })
-
-
-// 选择器：https://blog.csdn.net/major_zhang/article/details/78118823
