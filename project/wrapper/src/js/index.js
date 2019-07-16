@@ -1,10 +1,12 @@
 let data = [
-    {name: '朱昆鹏1', src: './src/img/1.png', des: '前端工程师1', age: 21},
-    {name: '朱昆鹏2', src: './src/img/1.png', des: '前端工程师2', age: 22},
-    {name: '朱昆鹏3', src: './src/img/1.png', des: '前端工程师3', age: 23},
-    {name: '朱昆鹏4', src: './src/img/1.png', des: '前端工程师4', age: 24},
-    {name: '朱昆鹏5', src: './src/img/1.png', des: '前端工程师5', age: 25}
+    {name: '朱昆鹏1', src: './src/img/1.png', des: '前端工程师1', sex: 'man'},
+    {name: '朱昆鹏2', src: './src/img/1.png', des: '前端工程师2', sex: 'man'},
+    {name: '朱昆鹏3', src: './src/img/1.png', des: '前端工程师3', sex: 'man'},
+    {name: '朱昆鹏4', src: './src/img/1.png', des: '前端工程师4', sex: 'man'},
+    {name: '林雨桐', src: './src/img/1.png', des: '前端工程师5', sex: 'woman'}
 ]
+
+let filterStr = 'All'
 
 /**
  * 根据数据生成 li标签
@@ -27,6 +29,7 @@ function createliEles (dom, data) {
     dom.innerHTML = liStrs
 }
 
+
 /**
  * 搜索筛选函数
  * 
@@ -35,11 +38,14 @@ function createliEles (dom, data) {
  */
 
 function searchFilter (inp) {
-    return data.filter( item => new RegExp(`${inp}`, 'g').test(item.name) )
+    return data.filter( item => {
+        return new RegExp(`${inp}`, 'g').test(item.name) && (filterStr === 'All' || item.sex === filterStr)
+    })
 }
 
+
 /**
- * 防抖函数
+ * 防抖函数（工具类）
  * 
  * @param {Function} 需要进行防抖处理的函数
  * @param {Number} 节流秒数
@@ -53,7 +59,7 @@ function debounce(fn, num) {
       }, num);
     };
 }
-  
+
 
 /**
  * 初始化函数
@@ -78,8 +84,22 @@ input.addEventListener('input', debounce( event => {
 }, 300))
 
 /**
- * 鼠标点击事件（事件冒泡）
+ * 鼠标点击切换事件（事件冒泡最好，现在是注册了三个事件）
  */
+let btns = document.querySelectorAll('.btn')
+btns.forEach( item => {
+
+    item.addEventListener('click', event => {
+        
+        btns.forEach( item => item.className = 'btn') // 清空其他的，但是感觉这个做法不是最好
+
+        event.target.className = 'btn active'
+        filterStr = event.target.innerText
+
+        let data = searchFilter(input.value)
+        createliEles(ulDom, data)
+    })
+})
 
 
 // 选择器：https://blog.csdn.net/major_zhang/article/details/78118823
