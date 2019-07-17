@@ -1,39 +1,77 @@
-:root {
-    /* 顶部 */
-    --header-height: 38px; /* 高度 */
-    --header-bgc: #999; /* 背景颜色 */
+.el-header, .el-footer {
+  background-color: #B3C0D1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
 }
 
-html, body {
-    width: 100%;
+.el-aside {
+  background-color: #D3DCE6;
+  color: #333;
+  text-align: center;
+  line-height: 200px;
+}
+
+.el-main {
+  background-color: #E9EEF3;
+  color: #333;
+  /* text-align: center; */
+  /* line-height: 160px; */
+}
+
+body > .el-container {
+  margin-bottom: 40px;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
+}
+
+
+/* el-main start */
+.el-main {
     height: 100%;
-}
-
-/* 顶部 */
-header {
-    line-height: var(--header-height);
-    height: var(--header-height);
-    background-color: var(--header-bgc);
-}
-
-/* 内容 */
-main {
-    width: 100%;
-    /* height: cale(100% - 50) ; */
-    height: 90%;
     overflow: auto;
 }
-
-/* 每一行内容 */
-main .main-item-p {
+.project-line {
+    width: 100%;
+    background-color: #ddd;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+.project-line .project-line_title {
+    font-size: 18px;
+    color: #555;
+    padding: 20px 20px 20px;
+}
+.project-item_line {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.project-item {
+    width: 30%;
+    height: 200px;
+    background-color: #999;
 }
 
-/* 每一项内容 */
-main .main-item {
-    width: 30%;
-    height: 400px;
-    background-color: #666;
-    margin-top: 20px;
+
+/* 弹出框 start */
+.el-dialog {
+    overflow: auto;
+    margin: 5vh auto 0px !important;
+    height: 90%;
+}
+.el-dialog__body {
+    padding: 0;
+    height: 90%;
+}
+.el-dialog iframe {
+    width: 100%;
+    height: 100%;
 }

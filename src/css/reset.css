@@ -46,3 +46,18 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+/* 去掉a标签样式 */
+a{ 
+	text-decoration:none;
+	color:#333;
+} 
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+#app {
+	width: 100%;
+	height: 100%;
+}

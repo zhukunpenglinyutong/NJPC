@@ -5,38 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    <!-- 顶部 -->
-    <header>顶部</header>
 
-    <!-- 内容 -->
-    <main>
-        <div class="main-item-p">
-            <div class="main-item">
-                <h3>标题名称</h3>
-                <!-- 弹出框的方式展示最好 -->
-                <!-- 项目介绍 -->
-                <!-- 效果展示 -->
-                <!-- 代码实现 -->
-            </div>
-            <div class="main-item">第二项</div>
-            <div class="main-item">第三项</div>
-        </div>
-        <div class="main-item-p">
-            <div class="main-item">第一项</div>
-            <div class="main-item">第二项</div>
-            <div class="main-item">第三项</div>
-        </div>
-        <div class="main-item-p">
-            <div class="main-item">第一项</div>
-            <div class="main-item">第二项</div>
-            <div class="main-item">第三项</div>
-        </div>
-    </main>
+    <div id="app">
 
-    <script src="./js/index.js"></script>
+        <el-container style="width: 100%; height:100%;">
+            <!-- 头部 -->
+            <el-header>Header</el-header>
+
+            <el-container>
+                <!-- 左侧是树形结构 -->
+                <el-aside width="200px">
+                    <el-tree :data="treeData" @node-click="handleNodeClick"></el-tree>
+                </el-aside>
+
+                <el-main>
+
+                  <!-- 三层循环获得DOM结构 -->
+                  <template v-for="(item, index) in mainData">
+                      <div class="project-line">
+                        <h3 class="project-line_title">{{item.title}}</h3>
+                        
+                        <!-- 遇到的第一个问题就是这个，一个连续的数组，怎么每隔三个划分 -->
+                        <template v-for="(jtem, index) in item.projects">
+                            <div class="project-item_line">
+                              <template v-for="(ztem, index) in jtem">
+                                  <a @click="clickProject(ztem)" href="javascript:;" class="project-item">{{ztem.name}}</a>
+                              </template>
+                            </div>
+                        </template>
+
+                      </div>
+                  </template>
+
+                  <!-- DOM 结构
+                  <div class="project-line">
+                    <h3 class="project-line_title">集合一</h3>
+                    <div class="project-item_line">
+                      <div class="project-item">1</div>
+                      <div class="project-item">2</div>
+                      <div class="project-item">3</div>
+                    </div>
+                    <div>
+                      <div class="project-item">4</div>
+                    </div>
+                  </div>
+                  <div class="project-line">
+                    <h3 class="project-line_title">集合二</h3>
+                    <div class="project-item_line">
+                      <div class="project-item">1</div>
+                      <div class="project-item">2</div>
+                    </div>
+                  </div> -->
+
+                </el-main>
+
+            </el-container>
+
+        </el-container>
+
+      <el-dialog
+        title="项目预览"
+        :visible.sync="dialogVisible"
+        width="95%">
+        <iframe :src="clickUrl"></iframe>
+      </el-dialog>
+
+    </div>
+
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="./js/json.js"></script>
+
+<script>
+
+  new Vue({
+    el: '#app',
+    data () {
+      return {
+        treeData: treeData, // tree组件数据
+        mainData: mainData, // 内容区域 数组
+        dialogVisible: false, // 弹出框
+        clickUrl: '', // 跳转的URL链接地址
+      }
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
+      },
+      clickProject (item) {
+        this.dialogVisible = true;
+        this.clickUrl = item.url;
+        console.log('测试', item)
+      }
+    }
+  })
+
+</script>
 </body>
 </html>
